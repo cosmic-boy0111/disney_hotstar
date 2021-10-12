@@ -1,9 +1,8 @@
-
-
 const { response } = require('express');
 const express = require('express')
-const Cryptr = require('cryptr');
-const cryptr = new Cryptr(process.env.SECRET_KEY);
+
+
+
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const authenticate = require('../middleware/authenticate');
@@ -11,13 +10,185 @@ const authenticate = require('../middleware/authenticate');
 const router = express.Router();
 
 require('../db/conn');
-const {User,Messages,NewUser,Chart,Polar} = require('../model/userSchema')
+const {User,HomeBanner,DealOFTheDay,Mobiles,Electronics,Appliances,Men,Women} = require('../model/userSchema')
+
+router.get('/', (req,res)=>{
+    res.send(`hello world from the server router js`)
+})
+
+router.post('/homeBanner',  async (req,res)=>{
+    try {
+        const {title,path,img} = req.body;
+        const banner = new HomeBanner({title,path,img});
+        banner.save();
+        res.status(200).json({
+            message:'hello'
+        })
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+router.get('/homeBanner', async (req,res)=>{
+    try {
+        const data = await HomeBanner.find({title:'homeBanner'});
+        res.send(data)
+        // console.log(data);
+    } catch (error) {
+        // consol.log('error')
+        console.log(error);
+    }
+})
+
+router.post('/dealOfTheDay',  async (req,res)=>{
+    try {
+        const {title,path,img,name,qnt,prize} = req.body;
+        const product = new DealOFTheDay({title,path,img,name,qnt,prize});
+        product.save();
+        res.status(200).json({
+            message:'hello'
+        })
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+router.get('/dealOfTheDay', async (req,res)=>{
+    try {
+        const data = await DealOFTheDay.find({title:'dealOfTheDay'});
+        res.send(data)
+        // console.log(data);
+    } catch (error) {
+        consol.log('error')
+    }
+})
+
+router.post('/mobiles', async (req,res)=>{
+    try {
+
+        const {title,path,img,name,qnt,prize} = req.body;
+        const product = new Mobiles({title,path,img,name,qnt,prize}) 
+        product.save();   
+        res.status(200).json({
+            message:'hello'
+        })    
+        
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+router.get('/mobiles', async (req,res)=>{
+    try {
+        const data = await Mobiles.find({title:'mobiles'})
+        res.send(data)
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+router.post('/electronics', async (req,res)=>{
+    try {
+
+        const {title,path,img,name,qnt,prize} = req.body;
+        const product = new Electronics({title,path,img,name,qnt,prize}) 
+        product.save();   
+        res.status(200).json({
+            message:'hello'
+        })    
+        
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+router.get('/electronics', async (req,res)=>{
+    try {
+        const data = await Electronics.find({title:'electronics'})
+        res.send(data)
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+router.post('/appliances', async (req,res)=>{
+    try {
+
+        const {title,path,img,name,qnt,prize} = req.body;
+        const product = new Appliances({title,path,img,name,qnt,prize}) 
+        product.save();   
+        res.status(200).json({
+            message:'hello'
+        })    
+        
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+router.get('/appliances', async (req,res)=>{
+    try {
+        const data = await Appliances.find({title:'appliances'})
+        res.send(data)
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+router.post('/men', async (req,res)=>{
+    try {
+
+        const {title,path,img,name,qnt,prize} = req.body;
+        const product = new Men({title,path,img,name,qnt,prize}) 
+        product.save();   
+        res.status(200).json({
+            message:'hello'
+        })    
+        
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+router.get('/men', async (req,res)=>{
+    try {
+        const data = await Men.find({title:'men'})
+        res.send(data)
+    } catch (error) {
+        console.log(error);
+    }
+})
+router.post('/women', async (req,res)=>{
+    try {
+
+        const {title,path,img,name,qnt,prize} = req.body;
+        const product = new Women({title,path,img,name,qnt,prize}) 
+        product.save();   
+        res.status(200).json({
+            message:'hello'
+        })    
+        
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+router.get('/women', async (req,res)=>{
+    try {
+        const data = await Women.find({title:'women'})
+        res.send(data)
+    } catch (error) {
+        console.log(error);
+    }
+})
 
 
+
+///////////////// user //////////////// 
 
 router.post('/register',async(req,res)=>{
     const { name,email,phone,password,cpassword } = req.body
-    if( !name || !email || !phone || !password || !cpassword ){
+    if( !name || !phone || !email || !password || !cpassword ){
         return res.status(422).json({error:'error'});
     }
 
@@ -38,32 +209,6 @@ router.post('/register',async(req,res)=>{
     }
 });
 
-router.post('/newUser',async(req,res)=>{
-    const { name,email,phone,password,cpassword } = req.body
-    if( !name || !email || !phone || !password || !cpassword ){
-        return res.status(422).json({error:'error'});
-    }
-
-    try {
-        const userExits =  await  NewUser.findOne({email:email});
-
-        if(userExits){
-            return res.status(422).json({error:'email already exist'})
-        }
-
-        const user = new NewUser({ name,email,phone,password,cpassword});
-        await user.save();
-
-        res.status(201).json({ message: 'new user registered' })
-
-    } catch (error) {
-        console.log(error);
-        res.status(400).json({
-            error:'invalid credentials'
-        });
-    }
-});
-
 
 // login route
 
@@ -72,11 +217,11 @@ router.post('/signin', async (req,res)=>{
     try {
         let token;
         const {email,password} = req.body;
-        // if(!email || !password){
-        //     return res.status(400).json({
-        //         error:'plz fill the data'
-        //     })
-        // }
+        if(!email || !password){
+            return res.status(400).json({
+                error:'plz fill the data'
+            })
+        }
 
         const userLogin = await User.findOne({email:email});
 
@@ -85,11 +230,11 @@ router.post('/signin', async (req,res)=>{
             console.log(User);
             const isMatch = await bcrypt.compare(password, userLogin.password);
 
-            token = await userLogin.generateAuthToken();
+            const token = await userLogin.generateAuthToken();
 
             console.log(token);
 
-            res.cookie("jwtoken",token,{
+            res.cookie("jwToken",token,{
                 expires: new Date(Date.now() + 25892000000),
                 httpOnly:true
             })
@@ -99,97 +244,37 @@ router.post('/signin', async (req,res)=>{
                     error:'invalid credentials'
                 });
             }else{
-                res.status(200).json({
+                res.json({
                     message:'user sign in successfully'
                 });
             }
         }else{
-            console.log('not sign in');
             res.status(400).json({
                 error:'invalid credentials'
             });
         }
 
-        
-
     } catch (error) {
-        console.log('not sign in 2');
-        res.status(400).json({
+        res.json({
             error:'error'
         });
     }
 })
 
+// get user data for contact us and home page
 
-router.post('/isAd',async(req,res)=>{
-    const {email,isAd} = req.body;
-    try {
-        const user = await User.findOne({email:email});
-        if(user){
-            
-            console.log(email);
-
-            const check = await user.checkIsAdmin(isAd);
-            user.save();
-
-            res.status(201).json({
-                message:'admin added'
-            })
-
-            console.log('admin added');
-        }else{
-            res.status(400).json({
-                error:'invalid credentials'
-            });
-        }
-
-        
-    } catch (error) {
-        console.log(error);
-        res.status(400).json({
-            error:'invalid credentials'
-        });
-    }
+router.get('/about', authenticate , (req,res)=>{
+    console.log(`hello my about`);
+    res.send(req.rootUser);
 })
 
-
-// get user data for contact us and home page
 
 router.get('/getdata', authenticate , (req,res)=>{
     console.log(`hello my about`);
     res.send(req.rootUser);
 })
 
-router.get('/getUsers', async (req,res)=>{
-    
-    try {
-        const data = await User.find({title:'user'});
-        res.send(data);
-    } catch (error) {
-        console.log(error);
-    }
-
-})
-
-router.get('/getNewUsers', async (req,res)=>{
-    
-    try {
-        const data = await NewUser.find({title:'user'});
-        res.send(data);
-    } catch (error) {
-        console.log(error);
-    }
-
-})
-
-
-// logout
-
-router.get('/logout', (req,res)=>{
-    console.log(`hello my logout page`);
-    res.clearCookie('jwtoken',{path:'/'})
-    res.status(200).json({ message:'user logout'});
-})
+// contact us page
 
 router.post('/addimg', authenticate ,  async (req,res)=>{
     try {
@@ -214,140 +299,67 @@ router.post('/addimg', authenticate ,  async (req,res)=>{
     }
 })
 
-
-router.post('/addMessage', async (req,res)=>{
-
+router.post('/addAddress', authenticate ,  async (req,res)=>{
     try {
+        const {pincode,locality,address,city,state,landmark,aphone,addressType} = req.body;
+        // console.log(img);
+        const user = await User.findOne({_id:req.userID});
+        if(user){
+            const add = await user.addAddress(req.body);
+            await user.save();
 
-        const {email,name,img} = req.body;
-        var {message} = req.body;
+            res.status(200).json({
+                message:'address added'
+            })
 
-        message = cryptr.encrypt(message)
+            console.log('address added');
+        }
 
-        const msg = new Messages({email,message,name,img});
-        msg.save();
-        res.status(200).json({ message: 'message send' })
-
-    } catch (error) {
-        console.log(error);
-    }
-})
-
-router.get('/getMessage', async (req,res)=>{
-    try {
-        var data = await Messages.find({title:'messages'})
-        data.forEach(e=>e.message = cryptr.decrypt(e.message));
-        // console.log(data);
-        res.send(data);
-    } catch (error) {
-        console.log(error);
-    }
-})
-
-router.post('/deleteUser', async(req,res)=>{
-    const {id} = req.body;
-    try {
-        const user = await User.deleteOne({_id:id})
-        res.status(200).json({
-            msg:'user delete'
-        });
-    } catch (error) {
-        console.log(error);
-    }
-})
-
-router.post('/deleteNewUser', async(req,res)=>{
-    const {id} = req.body;
-    try {
-        const user = await NewUser.deleteOne({_id:id})
-        res.status(200).json({
-            msg:'user delete'
-        });
-    } catch (error) {
-        console.log(error);
-    }
-})
-
-
-// router.post('/addCount',async(req,res)=>{
-//     const {idx} = req.body
-//     try {
-//         const userExits =  await Chart.findOne({title:'count'});
-
-//         const user = new Chart({ idx});
-//         await user.save();
-
-//         res.status(201).json({ message: 'new user registered' })
-
-//     } catch (error) {
-//         console.log(error);
-//         res.status(400).json({
-//             error:'invalid credentials'
-//         });
-//     }
-// });
-
-
-router.get('/getCount',async(req,res)=>{
-    try {
-        const data = await Chart.findOne({title:'count'})
-        res.send(data.count);
-    } catch (error) {
-        console.log(error);
-    }
-})
-
-router.post('/addCount',async(req,res)=>{
-    const {count,idx} = req.body;
-    try {
-        const user = await Chart.findOne({title:'count'});
-        const add = await user.Inc(count,idx);
-        await user.save();
-        // console.log(user);
-        res.status(201).json({
-            message:'count inc'
-        })
-
+    
         
     } catch (error) {
         console.log(error);
     }
 })
 
+router.post('/contact', authenticate , async (req,res)=>{
 
-
-
-router.get('/getPolar',async(req,res)=>{
     try {
-        const data = await Polar.findOne({title:'count'})
-        res.send(data.count);
+        const {name, email, phone, message} = req.body;
+        if(!name || !email || !phone || !message){
+            console.log('error in contact form');
+            return res.json({
+                error:'please fill the contact from'
+            })
+        }
+
+        const userContact = await User.findOne({_id:req.userID});
+        if(userContact){
+            const userMessage = await userContact.addMessage(name,email,phone,message);
+
+            await userContact.save();
+
+            res.status(201).json({
+                message:'user contact successfully'
+            })
+        }
+
     } catch (error) {
         console.log(error);
     }
 })
 
-router.post('/addPolar',async(req,res)=>{
-    const {count} = req.body;
-    try {
-        const user = await Polar.findOne({title:'count'});
-        const add = await user.Inc(count);
-        await user.save();
-        // console.log(user);
-        res.status(201).json({
-            message:'count inc'
-        })
 
-        
-    } catch (error) {
-        console.log(error);
-    }
+
+////////// log out ///////////
+router.get('/logout', (req,res)=>{
+    console.log(`hello my logout page`);
+    res.clearCookie('jwToken',{path:'/'})
+    res.status(200).json({ message:'user logout'});
 })
 
 
-
-
-
-
+//////////////// payment /////
 
 
 module.exports = router
