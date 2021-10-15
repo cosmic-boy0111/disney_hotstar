@@ -25,7 +25,6 @@ app.use(require('./router/auth'));
 const User = require('./model/userSchema')
 const PORT = process.env.PORT;
 
-
 app.listen(PORT, ()=>{
     console.log(`server is running at port no ${PORT}`);
 })

@@ -10,179 +10,11 @@ const authenticate = require('../middleware/authenticate');
 const router = express.Router();
 
 require('../db/conn');
-const {User,HomeBanner,DealOFTheDay,Mobiles,Electronics,Appliances,Men,Women} = require('../model/userSchema')
+const {User,MainHeader,TvHeader,MoviesHeader,DisneyHeader} = require('../model/userSchema')
 
 router.get('/', (req,res)=>{
     res.send(`hello world from the server router js`)
 })
-
-router.post('/homeBanner',  async (req,res)=>{
-    try {
-        const {title,path,img} = req.body;
-        const banner = new HomeBanner({title,path,img});
-        banner.save();
-        res.status(200).json({
-            message:'hello'
-        })
-    } catch (error) {
-        console.log(error);
-    }
-})
-
-router.get('/homeBanner', async (req,res)=>{
-    try {
-        const data = await HomeBanner.find({title:'homeBanner'});
-        res.send(data)
-        // console.log(data);
-    } catch (error) {
-        // consol.log('error')
-        console.log(error);
-    }
-})
-
-router.post('/dealOfTheDay',  async (req,res)=>{
-    try {
-        const {title,path,img,name,qnt,prize} = req.body;
-        const product = new DealOFTheDay({title,path,img,name,qnt,prize});
-        product.save();
-        res.status(200).json({
-            message:'hello'
-        })
-    } catch (error) {
-        console.log(error);
-    }
-})
-
-router.get('/dealOfTheDay', async (req,res)=>{
-    try {
-        const data = await DealOFTheDay.find({title:'dealOfTheDay'});
-        res.send(data)
-        // console.log(data);
-    } catch (error) {
-        consol.log('error')
-    }
-})
-
-router.post('/mobiles', async (req,res)=>{
-    try {
-
-        const {title,path,img,name,qnt,prize} = req.body;
-        const product = new Mobiles({title,path,img,name,qnt,prize}) 
-        product.save();   
-        res.status(200).json({
-            message:'hello'
-        })    
-        
-    } catch (error) {
-        console.log(error);
-    }
-})
-
-router.get('/mobiles', async (req,res)=>{
-    try {
-        const data = await Mobiles.find({title:'mobiles'})
-        res.send(data)
-    } catch (error) {
-        console.log(error);
-    }
-})
-
-router.post('/electronics', async (req,res)=>{
-    try {
-
-        const {title,path,img,name,qnt,prize} = req.body;
-        const product = new Electronics({title,path,img,name,qnt,prize}) 
-        product.save();   
-        res.status(200).json({
-            message:'hello'
-        })    
-        
-    } catch (error) {
-        console.log(error);
-    }
-})
-
-router.get('/electronics', async (req,res)=>{
-    try {
-        const data = await Electronics.find({title:'electronics'})
-        res.send(data)
-    } catch (error) {
-        console.log(error);
-    }
-})
-
-router.post('/appliances', async (req,res)=>{
-    try {
-
-        const {title,path,img,name,qnt,prize} = req.body;
-        const product = new Appliances({title,path,img,name,qnt,prize}) 
-        product.save();   
-        res.status(200).json({
-            message:'hello'
-        })    
-        
-    } catch (error) {
-        console.log(error);
-    }
-})
-
-router.get('/appliances', async (req,res)=>{
-    try {
-        const data = await Appliances.find({title:'appliances'})
-        res.send(data)
-    } catch (error) {
-        console.log(error);
-    }
-})
-
-router.post('/men', async (req,res)=>{
-    try {
-
-        const {title,path,img,name,qnt,prize} = req.body;
-        const product = new Men({title,path,img,name,qnt,prize}) 
-        product.save();   
-        res.status(200).json({
-            message:'hello'
-        })    
-        
-    } catch (error) {
-        console.log(error);
-    }
-})
-
-router.get('/men', async (req,res)=>{
-    try {
-        const data = await Men.find({title:'men'})
-        res.send(data)
-    } catch (error) {
-        console.log(error);
-    }
-})
-router.post('/women', async (req,res)=>{
-    try {
-
-        const {title,path,img,name,qnt,prize} = req.body;
-        const product = new Women({title,path,img,name,qnt,prize}) 
-        product.save();   
-        res.status(200).json({
-            message:'hello'
-        })    
-        
-    } catch (error) {
-        console.log(error);
-    }
-})
-
-router.get('/women', async (req,res)=>{
-    try {
-        const data = await Women.find({title:'women'})
-        res.send(data)
-    } catch (error) {
-        console.log(error);
-    }
-})
-
-
 
 ///////////////// user //////////////// 
 
@@ -276,80 +108,6 @@ router.get('/getdata', authenticate , (req,res)=>{
 
 // contact us page
 
-router.post('/addimg', authenticate ,  async (req,res)=>{
-    try {
-        const {img} = req.body;
-        // console.log(img);
-        const user = await User.findOne({_id:req.userID});
-        if(user){
-            const add = await user.addImg(img);
-            await user.save();
-
-            res.status(201).json({
-                message:'img added'
-            })
-
-            console.log('img added');
-        }
-
-    
-        
-    } catch (error) {
-        console.log(error);
-    }
-})
-
-router.post('/addAddress', authenticate ,  async (req,res)=>{
-    try {
-        const {pincode,locality,address,city,state,landmark,aphone,addressType} = req.body;
-        // console.log(img);
-        const user = await User.findOne({_id:req.userID});
-        if(user){
-            const add = await user.addAddress(req.body);
-            await user.save();
-
-            res.status(200).json({
-                message:'address added'
-            })
-
-            console.log('address added');
-        }
-
-    
-        
-    } catch (error) {
-        console.log(error);
-    }
-})
-
-router.post('/contact', authenticate , async (req,res)=>{
-
-    try {
-        const {name, email, phone, message} = req.body;
-        if(!name || !email || !phone || !message){
-            console.log('error in contact form');
-            return res.json({
-                error:'please fill the contact from'
-            })
-        }
-
-        const userContact = await User.findOne({_id:req.userID});
-        if(userContact){
-            const userMessage = await userContact.addMessage(name,email,phone,message);
-
-            await userContact.save();
-
-            res.status(201).json({
-                message:'user contact successfully'
-            })
-        }
-
-    } catch (error) {
-        console.log(error);
-    }
-})
-
-
 
 ////////// log out ///////////
 router.get('/logout', (req,res)=>{
@@ -359,7 +117,126 @@ router.get('/logout', (req,res)=>{
 })
 
 
-//////////////// payment /////
+////////////// main header //////////////////
+
+router.post('/mainHeader',async(req,res)=>{
+    const { title,path,name,desc1,desc2,hImg } = req.body
+    try {
+        const data = new MainHeader({title,path,name,desc1,desc2,hImg});
+        await data.save();
+        res.status(200).send({
+            message:'added'
+        })
+    } catch (error) {
+        res.status(400).send({
+            message:'not added'
+        })
+    }
+})
+
+router.get('/mainHeader',async(req,res)=>{
+
+    try {
+        const data = await MainHeader.find({title:'mainheader'})
+        res.status(200).send(data)
+    } catch (error) {
+        res.status(400).send({
+            message:'not added'
+        })
+    }
+})
+
+
+///////////// tvHeader /////////////////
+
+
+router.post('/tvHeader',async(req,res)=>{
+    const { title,path,name,desc1,desc2,hImg } = req.body
+    try {
+        const data = new TvHeader({title,path,name,desc1,desc2,hImg});
+        await data.save();
+        res.status(200).send({
+            message:'added'
+        })
+    } catch (error) {
+        res.status(400).send({
+            message:'not added'
+        })
+    }
+})
+
+router.get('/tvHeader',async(req,res)=>{
+
+    try {
+        const data = await TvHeader.find({title:'tvheader'})
+        res.status(200).send(data)
+    } catch (error) {
+        res.status(400).send({
+            message:'not added'
+        })
+    }
+})
+
+
+///////////// moviesHeader /////////////////
+
+
+router.post('/moviesHeader',async(req,res)=>{
+    const { title,path,name,desc1,desc2,hImg } = req.body
+    try {
+        const data = new MoviesHeader({title,path,name,desc1,desc2,hImg});
+        await data.save();
+        res.status(200).send({
+            message:'added'
+        })
+    } catch (error) {
+        res.status(400).send({
+            message:'not added'
+        })
+    }
+})
+
+router.get('/moviesHeader',async(req,res)=>{
+
+    try {
+        const data = await MoviesHeader.find({title:'moviesheader'})
+        res.status(200).send(data)
+    } catch (error) {
+        res.status(400).send({
+            message:'not added'
+        })
+    }
+})
+
+///////////// disneyHeader /////////////////
+
+
+router.post('/disneyHeader',async(req,res)=>{
+    const { title,path,name,desc1,desc2,hImg } = req.body
+    try {
+        const data = new DisneyHeader({title,path,name,desc1,desc2,hImg});
+        await data.save();
+        res.status(200).send({
+            message:'added'
+        })
+    } catch (error) {
+        res.status(400).send({
+            message:'not added'
+        })
+    }
+})
+
+router.get('/disneyHeader',async(req,res)=>{
+
+    try {
+        const data = await DisneyHeader.find({title:'disneyheader'})
+        res.status(200).send(data)
+    } catch (error) {
+        res.status(400).send({
+            message:'not added'
+        })
+    }
+})
 
 
 module.exports = router

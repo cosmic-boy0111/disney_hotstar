@@ -25,34 +25,7 @@ const userSchema = new mongoose.Schema({
         type : String,
         required : true
     },
-    date : {
-        type : Date,
-        default: Date.now(),
-    },
-    img : {
-        type : String,
-        default : ''
-    },
-    messages : [
-        {
-            name : {
-                type : String,
-                required : true
-            },
-            email : {
-                type : String,
-                required : true
-            },
-            phone : {
-                type : Number,
-                required : true
-            },
-            message : {
-                type : String,
-                required : true
-            }
-        }
-    ],
+    
     tokens : [
         {
             token : {
@@ -61,219 +34,119 @@ const userSchema = new mongoose.Schema({
             }
         }
     ],
-    Address : {
-        pincode : {
-            type : String,
-            default : null
-        },
-        locality : {
-            type : String,
-            default : null
-        },
-        address : {
-            type : String,
-            default : null
-        },
-        city : {
-            type : String,
-            default : null
-        },
-        state : {
-            type : String,
-            default : null
-        },
-        landmark : {
-            type : String,
-            default : null
-        },
-        aphone : {
-            type : String,
-            default : null
-        },
-        addressType:{
-            type : String,
-            default : null
-        }
-    }
 
 })
 
-const homeBanner = new mongoose.Schema({
+const mainHeader = new mongoose.Schema({
     title:{
-        type:String,
-        required:true
-    },
-    path:{
-        type:String,
-        required:true,
-    },
-    img:{
-        type:String,
-        required:true
-    }
-})
-
-
-const dealOfTheDay = new mongoose.Schema({
-    title:{
-        type: String,
+        type : String,
         required : true
     },
     path:{
-        type: String,
-        required: true,
+        type : String,
+        required : true
     },
     name:{
-        type:String,
-        required : true,
+        type : String,
+        required : true
     },
-    img:{
-        type:String,
-        required : true,
+    desc1:{
+        type : String,
+        required : true
     },
-    prize:{
-        type:Number,
-        required : true,
+    desc2:{
+        type : String,
+        required : true
     },
-    qnt:{
-        type:Number,
-        required : true,
+    hImg:{
+        type: String,
+        required: true
     }
+    
 })
 
-const mobiles = new mongoose.Schema({
+const tvHeader = new mongoose.Schema({
     title:{
-        type: String,
+        type : String,
         required : true
     },
     path:{
-        type: String,
-        required: true,
+        type : String,
+        required : true
     },
     name:{
-        type:String,
-        required : true,
+        type : String,
+        required : true
     },
-    img:{
-        type:String,
-        required : true,
+    desc1:{
+        type : String,
+        required : true
     },
-    prize:{
-        type:Number,
-        required : true,
+    desc2:{
+        type : String,
+        required : true
     },
-    qnt:{
-        type:Number,
-        required : true,
+    hImg:{
+        type: String,
+        required: true
     }
+    
 })
 
-const electronics = new mongoose.Schema({
+const moviesHeader = new mongoose.Schema({
     title:{
-        type: String,
+        type : String,
         required : true
     },
     path:{
-        type: String,
-        required: true,
+        type : String,
+        required : true
     },
     name:{
-        type:String,
-        required : true,
+        type : String,
+        required : true
     },
-    img:{
-        type:String,
-        required : true,
+    desc1:{
+        type : String,
+        required : true
     },
-    prize:{
-        type:Number,
-        required : true,
+    desc2:{
+        type : String,
+        required : true
     },
-    qnt:{
-        type:Number,
-        required : true,
+    hImg:{
+        type: String,
+        required: true
     }
+    
 })
 
-const appliances = new mongoose.Schema({
+const disneyHeader = new mongoose.Schema({
     title:{
-        type: String,
+        type : String,
         required : true
     },
     path:{
-        type: String,
-        required: true,
-    },
-    name:{
-        type:String,
-        required : true,
-    },
-    img:{
-        type:String,
-        required : true,
-    },
-    prize:{
-        type:Number,
-        required : true,
-    },
-    qnt:{
-        type:Number,
-        required : true,
-    }
-})
-
-const men = new mongoose.Schema({
-    title:{
-        type: String,
+        type : String,
         required : true
     },
-    path:{
-        type: String,
-        required: true,
-    },
     name:{
-        type:String,
-        required : true,
-    },
-    img:{
-        type:String,
-        required : true,
-    },
-    prize:{
-        type:Number,
-        required : true,
-    },
-    qnt:{
-        type:Number,
-        required : true,
-    }
-})
-
-const women = new mongoose.Schema({
-    title:{
-        type: String,
+        type : String,
         required : true
     },
-    path:{
+    desc1:{
+        type : String,
+        required : true
+    },
+    desc2:{
+        type : String,
+        required : true
+    },
+    hImg:{
         type: String,
-        required: true,
-    },
-    name:{
-        type:String,
-        required : true,
-    },
-    img:{
-        type:String,
-        required : true,
-    },
-    prize:{
-        type:Number,
-        required : true,
-    },
-    qnt:{
-        type:Number,
-        required : true,
+        required: true
     }
+    
 })
 
 
@@ -300,49 +173,12 @@ userSchema.methods.generateAuthToken = async function() {
 }
 
 
-userSchema.methods.addMessage = async function(name,email,phone,message){
-    try{
-        this.messages = this.messages.concat({
-            name,email,phone,message
-        })
-        await this.save();
-        return this.messages;
-    } catch(err){
-        console.log(err);
-    }
-}
-
-
-userSchema.methods.addImg = async function(img){
-    try{
-        this.img = img;
-        await this.save();
-        return this.img;
-    } catch(err){
-        console.log(err);
-    }
-}
-
-userSchema.methods.addAddress = async function(obj){
-    try{
-        this.Address = obj;
-        await this.save();
-        return this.Address;
-    } catch(err){
-        console.log(err);
-    }
-}
-
-
 
 
 const User = mongoose.model('USER',userSchema);
-const HomeBanner = mongoose.model('HOMEBANNER',homeBanner);
-const DealOFTheDay = mongoose.model('DEALOFTHEDAY',dealOfTheDay);
-const Mobiles = mongoose.model('MOBILES',mobiles);
-const Electronics = mongoose.model('ELECTRONICS',electronics);
-const Appliances = mongoose.model('APPLIANCES',appliances);
-const Men = mongoose.model('MEN',men);
-const Women = mongoose.model('WOMEN',women);
+const MainHeader = mongoose.model('MainHeader',mainHeader);
+const TvHeader = mongoose.model('TvHeader',tvHeader);
+const MoviesHeader = mongoose.model('MoviesHeader',moviesHeader);
+const DisneyHeader = mongoose.model('DisneyHeader',disneyHeader);
     
-module.exports = {User,HomeBanner,DealOFTheDay,Mobiles,Electronics,Appliances,Men,Women};
+module.exports = {User,MainHeader,TvHeader,MoviesHeader,DisneyHeader};
