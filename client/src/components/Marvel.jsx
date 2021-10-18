@@ -37,10 +37,21 @@ const Marvel = () => {
         getData();
     }, [])
 
+    
+    const {setText} = useContext(userContext)
+
+    const set = () =>{
+        setText('')
+        var t = document.getElementsByClassName('search_div')[0];
+        var p = document.getElementsByClassName('border2')[0];
+        t.style.transition = 'all .2s ease-in-out';
+        t.style.width = '250px';
+        p.style.borderBottom = '1px solid white';
+    }
 
     return (
         <div className='body2'>
-            <video playsInline={true} preload='auto' autoPlay={true} muted={true} className='video2'>
+            <video playsInline={true} preload='auto' autoPlay={true} muted={true} className='video2' onClick={set}>
                 <source src={N3} type="video/mp4" style={{
                     borderRadius:'5px'
                 }}/>

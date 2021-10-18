@@ -13,8 +13,8 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background: linear-gradient(to bottom, #141b29, #0c111b 300px);
-  background-size: cover;
+  background: linear-gradient(to bottom, #141b29, #0c111b 300px); 
+  background-size: center cover; 
   scroll-behavior: smooth;
 }
 

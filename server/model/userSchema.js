@@ -61,6 +61,10 @@ const mainHeader = new mongoose.Schema({
     hImg:{
         type: String,
         required: true
+    },
+    vImg:{
+        type: String,
+        required : true
     }
     
 })
@@ -89,6 +93,10 @@ const tvHeader = new mongoose.Schema({
     hImg:{
         type: String,
         required: true
+    },
+    vImg:{
+        type: String,
+        required : true
     }
     
 })
@@ -117,6 +125,10 @@ const moviesHeader = new mongoose.Schema({
     hImg:{
         type: String,
         required: true
+    },
+    vImg:{
+        type: String,
+        required : true
     }
     
 })
@@ -145,6 +157,10 @@ const disneyHeader = new mongoose.Schema({
     hImg:{
         type: String,
         required: true
+    },
+    vImg:{
+        type: String,
+        required : true
     }
     
 })

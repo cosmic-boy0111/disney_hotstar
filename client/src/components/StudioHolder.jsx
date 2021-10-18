@@ -6,6 +6,7 @@ import { userContext } from '../App'
 
 const StudioHolder = ({obj}) => {
 
+    const {setText} = useContext(userContext);
 
     const history = useHistory();
 
@@ -19,6 +20,12 @@ const StudioHolder = ({obj}) => {
     }
 
     const go = () =>{
+        setText('')
+        var t = document.getElementsByClassName('search_div')[0];
+        var p = document.getElementsByClassName('border2')[0];
+        t.style.transition = 'all .2s ease-in-out';
+        t.style.width = '250px';
+        p.style.borderBottom = '1px solid white';
         history.push(`/${obj.path}`)
     
     }

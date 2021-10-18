@@ -16,6 +16,8 @@ import StartWars from './components/StartWars';
 import Geo from './components/Geo';
 import Footer from './components/Footer';
 import MoreAbout from './components/MoreAbout';
+import SearchMore from './components/SearchMore';
+import Subscribe from './components/Subscribe';
 
 export const userContext = createContext();
 
@@ -27,6 +29,8 @@ const App = () => {
   const [disneyBanner, setDisneyBanner] = useState([])
   const [more, setMore] = useState({})
   const [allData, setAllData] = useState([])
+  const [text, setText] = useState('')
+
 
   const getData = async () =>{
 
@@ -73,7 +77,6 @@ const App = () => {
       const data4 = await res4.json();
       setDisneyBanner(data4)
 
-      
       const res5 = await fetch('/tv',{
         method:'GET',
         headers:{
@@ -137,9 +140,18 @@ const App = () => {
       })
 
       const data11 = await res11.json();
+      const uniqueValuesSet = new Set();
+      const arr = [...data,...data2,...data3,...data4,...data5,...data6,...data7,...data8,...data9,...data10,...data11]
+      const filteredArr = arr.filter((obj) => {
+        const isPresentInSet = uniqueValuesSet.has(obj.name);
+        uniqueValuesSet.add(obj.name);
+        return !isPresentInSet;
+      });
 
-      setAllData([...data,...data2,...data3,...data4,...data5,...data6,...data7,...data8,...data9,...data10,...data11])
+      setAllData(filteredArr)
+      
 
+      
     } catch (error) {
       console.log(error);
     }
@@ -159,7 +171,9 @@ const App = () => {
           disneyBanner,
           more, 
           setMore,
-          allData
+          allData,
+          text, 
+          setText,
         }}>
 
         <Switch > 
@@ -211,6 +225,13 @@ const App = () => {
           <Route exact path="/moreabout">
             <Navbar />
             <MoreAbout />
+          </Route>
+          <Route exact path="/searchdata/:text">
+            <Navbar />
+            <SearchMore />
+          </Route>
+          <Route exact path="/subscribe">
+            <Subscribe />
           </Route>
         </Switch>
         </userContext.Provider>

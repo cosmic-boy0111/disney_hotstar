@@ -41,6 +41,8 @@ const Card = ({obj,idx,mov}) => {
             backgroundImage : `url(${obj.vImg})`,
             backgroundSize : 'cover',
             cursor:'pointer',
+            width:'150px',
+            margin:'.5rem'
         }}
         onMouseOver={doThis}
         onMouseLeave={doThat}

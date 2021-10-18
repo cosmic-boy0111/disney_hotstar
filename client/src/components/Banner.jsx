@@ -9,11 +9,17 @@ import { useHistory } from 'react-router-dom'
 const Banner = ({obj,show=false,got=true}) => {
 
     const history = useHistory();
-    const {setMore} = useContext(userContext);
+    const {setMore, setText} = useContext(userContext);
 
     const go = () =>{
 
         localStorage.setItem('more',JSON.stringify(obj));
+        setText('')
+        var t = document.getElementsByClassName('search_div')[0];
+        var p = document.getElementsByClassName('border2')[0];
+        t.style.transition = 'all .2s ease-in-out';
+        t.style.width = '250px';
+        p.style.borderBottom = '1px solid white';
         if(got){
             setMore(obj);
             history.push('/moreabout')
@@ -21,7 +27,7 @@ const Banner = ({obj,show=false,got=true}) => {
     }
 
     const go2 = () => {
-        
+        history.push('/subscribe')
     }
 
     return (
