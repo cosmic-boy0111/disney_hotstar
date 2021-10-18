@@ -1,22 +1,20 @@
-import React,{useContext,useEffect,useState} from 'react'
+import React,{useContext,useState,useEffect} from 'react'
 import { userContext } from '../App'
 import '../Style/Studio.css'
 import Slider from './Slider'
-import N1 from '../Videos/N1.mp4'
+import N3 from '../Videos/N3.mp4'
 import SkeletonColor from './Skeleton'
 import Footer from './Footer'
-
-const Disney = () => {
+const Marvel = () => {
 
     const [show, setShow] = useState(false)
-
 
     const [data, setData] = useState([])
 
     const getData = async() =>{
         try {
             
-            const res5 = await fetch('/disney',{
+            const res5 = await fetch('/marvel',{
             method:'GET',
             headers:{
                 'Content-Type' : 'application/json'
@@ -34,6 +32,7 @@ const Disney = () => {
     }
 
 
+
     useEffect(() => {
         getData();
     }, [])
@@ -42,11 +41,10 @@ const Disney = () => {
     return (
         <div className='body2'>
             <video playsInline={true} preload='auto' autoPlay={true} muted={true} className='video2'>
-                <source src={N1} type="video/mp4" style={{
+                <source src={N3} type="video/mp4" style={{
                     borderRadius:'5px'
                 }}/>
             </video>
-
             <div style={{
               display:show?'none':'flex'
             }}> 
@@ -55,20 +53,19 @@ const Disney = () => {
                 <SkeletonColor />
                 <SkeletonColor />
             </div>
-
             <div style={{
               display:show?'block':'none'
             }}>
 
-                <h5>Originals</h5>
+                <h5>Marvel Cinematic Universe</h5>
                 <Slider data={[...data]} mov={true}/>
-                <h5>Live Action Movies</h5>
+                <h5>marvel Movies</h5>
                 <Slider data={[...data].reverse()} mov={true}/>
-                <h5>Walt Disney Animation Studios</h5>
+                <h5>Marvel Cinematic Universe in Timeline Order</h5>
                 <Slider data={[...data]} mov={true}/>
-                <h5>Additional Animated Movies</h5>
+                <h5>Marvel Live Action Series and Specials</h5>
                 <Slider data={[...data].reverse()} mov={true}/>
-                <h5>Disney Channel Original Movies</h5>
+                <h5>Marvel Legacy Movies</h5>
                 <Slider data={[...data]} mov={true}/>
                 <Footer />
             </div>
@@ -76,4 +73,5 @@ const Disney = () => {
     )
 }
 
-export default Disney
+export default Marvel
+

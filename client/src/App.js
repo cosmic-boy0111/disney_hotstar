@@ -8,8 +8,14 @@ import Navbar from './components/Navbar'
 import Home from './components/Home'
 import Tv from './components/Tv';
 import Movies from './components/Movies';
-import Disney from './components/Disney';
-import axios from 'axios'
+import DisneyPage from './components/DisneyPage';
+import Disney from './components/Disney'
+import Pixar from './components/Pixar';
+import Marvel from './components/Marvel';
+import StartWars from './components/StartWars';
+import Geo from './components/Geo';
+import Footer from './components/Footer';
+import MoreAbout from './components/MoreAbout';
 
 export const userContext = createContext();
 
@@ -19,6 +25,8 @@ const App = () => {
   const [tvBanner, setTvBanner] = useState([])
   const [moviesBanner, setMoviesBanner] = useState([])
   const [disneyBanner, setDisneyBanner] = useState([])
+  const [more, setMore] = useState({})
+  const [allData, setAllData] = useState([])
 
   const getData = async () =>{
 
@@ -64,6 +72,74 @@ const App = () => {
 
       const data4 = await res4.json();
       setDisneyBanner(data4)
+
+      
+      const res5 = await fetch('/tv',{
+        method:'GET',
+        headers:{
+          'Content-Type' : 'application/json'
+        }
+      })
+
+      const data5 = await res5.json();
+
+      const res6 = await fetch('/movies',{
+        method:'GET',
+        headers:{
+          'Content-Type' : 'application/json'
+        }
+      })
+
+      const data6 = await res6.json();
+
+      const res7 = await fetch('/disney',{
+        method:'GET',
+        headers:{
+          'Content-Type' : 'application/json'
+        }
+      })
+
+      const data7 = await res7.json();
+
+      const res8 = await fetch('/pixar',{
+        method:'GET',
+        headers:{
+          'Content-Type' : 'application/json'
+        }
+      })
+
+      const data8 = await res8.json();
+
+      const res9 = await fetch('/marvel',{
+        method:'GET',
+        headers:{
+          'Content-Type' : 'application/json'
+        }
+      })
+
+      const data9 = await res9.json();
+
+      const res10 = await fetch('/starWars',{
+        method:'GET',
+        headers:{
+          'Content-Type' : 'application/json'
+        }
+      })
+
+
+      const data10 = await res10.json();
+
+      const res11 = await fetch('/geo',{
+        method:'GET',
+        headers:{
+          'Content-Type' : 'application/json'
+        }
+      })
+
+      const data11 = await res11.json();
+
+      setAllData([...data,...data2,...data3,...data4,...data5,...data6,...data7,...data8,...data9,...data10,...data11])
+
     } catch (error) {
       console.log(error);
     }
@@ -71,7 +147,7 @@ const App = () => {
 
   useEffect(() => {
     getData()
-  }, [])
+  },[])
 
   return (
     <>
@@ -80,25 +156,61 @@ const App = () => {
           homeBanner,
           tvBanner,
           moviesBanner,
-          disneyBanner
+          disneyBanner,
+          more, 
+          setMore,
+          allData
         }}>
 
         <Switch > 
           <Route exact path="/">
             <Navbar />
             <Home />
+            
           </Route>
           <Route exact path="/tv">
             <Navbar />
             <Tv />
+            
           </Route>
           <Route exact path="/movies">
             <Navbar />
             <Movies />
+            
           </Route> 
           <Route exact path="/disneypage">
             <Navbar />
+            <DisneyPage />
+            
+          </Route>
+          <Route exact path="/disney">
+            <Navbar />
             <Disney />
+            
+          </Route>
+          <Route exact path="/pixar">
+            <Navbar />
+            <Pixar />
+            
+          </Route>
+          <Route exact path="/marvel">
+            <Navbar />
+            <Marvel />
+            
+          </Route>
+          <Route exact path="/starwars">
+            <Navbar />
+            <StartWars />
+            
+          </Route>
+          <Route exact path="/geo">
+            <Navbar />
+            <Geo />
+            
+          </Route>
+          <Route exact path="/moreabout">
+            <Navbar />
+            <MoreAbout />
           </Route>
         </Switch>
         </userContext.Provider>

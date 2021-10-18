@@ -149,6 +149,203 @@ const disneyHeader = new mongoose.Schema({
     
 })
 
+const tv = new mongoose.Schema({
+    path:{
+        type : String,
+        required : true
+    },
+    name:{
+        type : String,
+        required : true
+    },
+    desc1:{
+        type : String,
+        required : true
+    },
+    desc2:{
+        type : String,
+        required : true
+    },
+    hImg:{
+        type: String,
+        required: true
+    },
+    vImg:{
+        type: String,
+        required : true
+    }
+    
+})
+
+
+const movies = new mongoose.Schema({
+    path:{
+        type : String,
+        required : true
+    },
+    name:{
+        type : String,
+        required : true
+    },
+    desc1:{
+        type : String,
+        required : true
+    },
+    desc2:{
+        type : String,
+        required : true
+    },
+    hImg:{
+        type: String,
+        required: true
+    },
+    vImg:{
+        type: String,
+        required : true
+    }
+    
+})
+
+const disney = new mongoose.Schema({
+    path:{
+        type : String,
+        required : true
+    },
+    name:{
+        type : String,
+        required : true
+    },
+    desc1:{
+        type : String,
+        required : true
+    },
+    desc2:{
+        type : String,
+        required : true
+    },
+    hImg:{
+        type: String,
+        required: true
+    },
+    vImg:{
+        type: String,
+        required : true
+    }
+    
+})
+
+const pixar = new mongoose.Schema({
+    path:{
+        type : String,
+        required : true
+    },
+    name:{
+        type : String,
+        required : true
+    },
+    desc1:{
+        type : String,
+        required : true
+    },
+    desc2:{
+        type : String,
+        required : true
+    },
+    hImg:{
+        type: String,
+        required: true
+    },
+    vImg:{
+        type: String,
+        required : true
+    }
+    
+})
+
+const marvel = new mongoose.Schema({
+    path:{
+        type : String,
+        required : true
+    },
+    name:{
+        type : String,
+        required : true
+    },
+    desc1:{
+        type : String,
+        required : true
+    },
+    desc2:{
+        type : String,
+        required : true
+    },
+    hImg:{
+        type: String,
+        required: true
+    },
+    vImg:{
+        type: String,
+        required : true
+    }
+    
+})
+
+const starWars = new mongoose.Schema({
+    path:{
+        type : String,
+        required : true
+    },
+    name:{
+        type : String,
+        required : true
+    },
+    desc1:{
+        type : String,
+        required : true
+    },
+    desc2:{
+        type : String,
+        required : true
+    },
+    hImg:{
+        type: String,
+        required: true
+    },
+    vImg:{
+        type: String,
+        required : true
+    }
+    
+})
+
+const geo = new mongoose.Schema({
+    path:{
+        type : String,
+        required : true
+    },
+    name:{
+        type : String,
+        required : true
+    },
+    desc1:{
+        type : String,
+        required : true
+    },
+    desc2:{
+        type : String,
+        required : true
+    },
+    hImg:{
+        type: String,
+        required: true
+    },
+    vImg:{
+        type: String,
+        required : true
+    }
+    
+})
+
 
 
 userSchema.pre('save', async function (next){
@@ -180,5 +377,25 @@ const MainHeader = mongoose.model('MainHeader',mainHeader);
 const TvHeader = mongoose.model('TvHeader',tvHeader);
 const MoviesHeader = mongoose.model('MoviesHeader',moviesHeader);
 const DisneyHeader = mongoose.model('DisneyHeader',disneyHeader);
+const Tv = mongoose.model('TV',tv);
+const Movies = mongoose.model('Movies',movies);
+const Disney = mongoose.model('Disney',disney);
+const Pixar = mongoose.model('Pixar',pixar);
+const Marvel = mongoose.model('Marvel',marvel);
+const StarWars = mongoose.model('StarWars',starWars);
+const Geo = mongoose.model('Geo',geo);
     
-module.exports = {User,MainHeader,TvHeader,MoviesHeader,DisneyHeader};
+module.exports = {
+    User,
+    MainHeader,
+    TvHeader,
+    MoviesHeader,
+    DisneyHeader,
+    Tv,
+    Movies,
+    Disney,
+    Pixar,
+    Marvel,
+    StarWars,
+    Geo
+};

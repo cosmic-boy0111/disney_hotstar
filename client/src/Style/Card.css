@@ -1,0 +1,132 @@
+.card_body{
+    /* padding: .5rem; */
+    margin-left: .6rem;
+    border-radius: 5px;
+    /* border: 1px solid red; */
+    height: 200px;
+    transform: scale(1);
+    transition: all .4s ease-in;
+}
+
+.card_body:hover{
+    transform: scale(1.25);
+    z-index: 1 !important;
+}
+
+.my_card{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 100%;
+    z-index: 9;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    bottom: 0;
+    font-size: 11px;
+    padding: .5rem;
+    opacity: 0;
+    transition: all .4s ease-in-out;
+}
+
+.controls{
+    font-size: 8px;
+    /* padding: 0 .5rem; */
+    /* border: 1px solid red; */
+    opacity: .7;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.controls2{
+    border-radius: 2px;
+    padding: 0 .5rem;
+    transition: all .3s ease;
+}
+
+.controls2:hover{
+    background-color: #334366;
+}
+
+
+
+.-multi-carousel-list{
+    overflow-y: visible !important;
+    overflow-x: hidden !important;
+}
+
+.react-multi-carousel-track{
+    padding: 2rem 0 !important;
+}
+
+.react-multi-carousel-item:hover{
+    z-index: 9 !important;
+}
+
+
+/* .slider_div{
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+} */
+
+.my_card img{
+    width: 100%;
+    border-radius: 5px;
+}
+
+.react-multiple-carousel__arrow{
+    right: calc(0% + 1px) !important;
+    position: absolute;
+    outline: 0;
+    border-radius: 0px !important;
+    z-index: 1000;
+    border: 0;
+    background: transparent !important;
+    min-width: 43px;
+    min-height: 100% !important;
+    opacity: 1 !important;
+    cursor: pointer;
+    transition: background .6s ease-in !important;
+    padding: 0 !important;
+}
+
+
+
+.react-multiple-carousel__arrow--left{
+    left: calc(0% + 0px) !important;
+    background: linear-gradient(to left, transparent, rgba(12,17,27,0.7), rgba(12,17,27,0.9)) !important;
+}
+
+.react-multiple-carousel__arrow--right{
+    right: calc(0% + 0px) !important;
+    background: linear-gradient(to right, transparent, rgba(12,17,27,0.7), rgba(12,17,27,0.9)) !important;
+}
+
+.css-ifep7{
+    padding: 1rem !important;
+}
+
+.css-ptiqhd-MuiSvgIcon-root{
+    width: 11px !important;
+}
+
+.social{
+    padding: .5rem;
+    border-radius: 3px;
+    margin-top: .5rem;
+    background-color: #334366;
+    margin-left: .5rem;
+    /* #1f80e0 */
+}
+
+.social:hover{
+    background-color: #1f80e0 ;
+}
+
+.link_foot{
+    color: white;
+    text-decoration: none;
+    
+}
+
+
+

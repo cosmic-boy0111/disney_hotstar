@@ -10,7 +10,20 @@ const authenticate = require('../middleware/authenticate');
 const router = express.Router();
 
 require('../db/conn');
-const {User,MainHeader,TvHeader,MoviesHeader,DisneyHeader} = require('../model/userSchema')
+const {
+    User,
+    MainHeader,
+    TvHeader,
+    MoviesHeader,
+    DisneyHeader,
+    Tv,
+    Movies,
+    Disney,
+    Pixar,
+    Marvel,
+    StarWars,
+    Geo
+} = require('../model/userSchema')
 
 router.get('/', (req,res)=>{
     res.send(`hello world from the server router js`)
@@ -237,6 +250,211 @@ router.get('/disneyHeader',async(req,res)=>{
         })
     }
 })
+
+
+///////////////////// TV /////////////
+
+router.post('/tv',async(req,res)=>{
+    const { path,name,desc1,desc2,hImg,vImg } = req.body
+    try {
+        const data = new Tv({path,name,desc1,desc2,hImg,vImg});
+        await data.save();
+        res.status(200).send({
+            message:'added'
+        })
+    } catch (error) {
+        res.status(400).send({
+            message:'not added'
+        })
+    }
+})
+
+router.get('/tv',async(req,res)=>{
+
+    try {
+        const data = await Tv.find({path:'tv'})
+        res.status(200).send(data)
+    } catch (error) {
+        res.status(400).send({
+            message:'not added'
+        })
+    }
+})
+
+///////////////////// Movies /////////////
+
+router.post('/movies',async(req,res)=>{
+    const { path,name,desc1,desc2,hImg,vImg } = req.body
+    try {
+        const data = new Movies({path,name,desc1,desc2,hImg,vImg});
+        await data.save();
+        res.status(200).send({
+            message:'added'
+        })
+    } catch (error) {
+        res.status(400).send({
+            message:'not added'
+        })
+    }
+})
+
+router.get('/movies',async(req,res)=>{
+
+    try {
+        const data = await Movies.find({path:'movies'})
+        res.status(200).send(data)
+    } catch (error) {
+        res.status(400).send({
+            message:'not added'
+        })
+    }
+})
+
+///////////////////// Disney /////////////
+
+router.post('/disney',async(req,res)=>{
+    const { path,name,desc1,desc2,hImg,vImg } = req.body
+    try {
+        const data = new Disney({path,name,desc1,desc2,hImg,vImg});
+        await data.save();
+        res.status(200).send({
+            message:'added'
+        })
+    } catch (error) {
+        res.status(400).send({
+            message:'not added'
+        })
+    }
+})
+
+router.get('/disney',async(req,res)=>{
+
+    try {
+        const data = await Disney.find({path:'disney'})
+        res.status(200).send(data)
+    } catch (error) {
+        res.status(400).send({
+            message:'not added'
+        })
+    }
+})
+
+///////////////////// Pixar /////////////
+
+router.post('/pixar',async(req,res)=>{
+    const { path,name,desc1,desc2,hImg,vImg } = req.body
+    try {
+        const data = new Pixar({path,name,desc1,desc2,hImg,vImg});
+        await data.save();
+        res.status(200).send({
+            message:'added'
+        })
+    } catch (error) {
+        res.status(400).send({
+            message:'not added'
+        })
+    }
+})
+
+router.get('/pixar',async(req,res)=>{
+
+    try {
+        const data = await Pixar.find({path:'pixar'})
+        res.status(200).send(data)
+    } catch (error) {
+        res.status(400).send({
+            message:'not added'
+        })
+    }
+})
+
+///////////////////// Pixar /////////////
+
+router.post('/marvel',async(req,res)=>{
+    const { path,name,desc1,desc2,hImg,vImg } = req.body
+    try {
+        const data = new Marvel({path,name,desc1,desc2,hImg,vImg});
+        await data.save();
+        res.status(200).send({
+            message:'added'
+        })
+    } catch (error) {
+        res.status(400).send({
+            message:'not added'
+        })
+    }
+})
+
+router.get('/marvel',async(req,res)=>{
+
+    try {
+        const data = await Marvel.find({path:'marvel'})
+        res.status(200).send(data)
+    } catch (error) {
+        res.status(400).send({
+            message:'not added'
+        })
+    }
+})
+
+///////////////////// star Wars /////////////
+
+router.post('/starWars',async(req,res)=>{
+    const { path,name,desc1,desc2,hImg,vImg } = req.body
+    try {
+        const data = new StarWars({path,name,desc1,desc2,hImg,vImg});
+        await data.save();
+        res.status(200).send({
+            message:'added'
+        })
+    } catch (error) {
+        res.status(400).send({
+            message:'not added'
+        })
+    }
+})
+
+router.get('/starWars',async(req,res)=>{
+
+    try {
+        const data = await StarWars.find({path:"starWars"})
+        res.status(200).send(data)
+    } catch (error) {
+        res.status(400).send({
+            message:'not added'
+        })
+    }
+})
+
+///////////////////// Geo /////////////
+
+router.post('/geo',async(req,res)=>{
+    const { path,name,desc1,desc2,hImg,vImg } = req.body
+    try {
+        const data = new Geo({path,name,desc1,desc2,hImg,vImg});
+        await data.save();
+        res.status(200).send({
+            message:'added'
+        })
+    } catch (error) {
+        res.status(400).send({
+            message:'not added'
+        })
+    }
+})
+
+router.get('/geo',async(req,res)=>{
+
+    try {
+        const data = await Geo.find({path:"geo"})
+        res.status(200).send(data)
+    } catch (error) {
+        res.status(400).send({
+            message:'not added'
+        })
+    }
+})
+
 
 
 module.exports = router

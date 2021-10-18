@@ -1,23 +1,21 @@
 import React,{useContext,useEffect,useState} from 'react'
-import '../Style/Home.css'
-import {userContext} from '../App'
+import { userContext } from '../App'
+import '../Style/Studio.css'
 import Slider from './Slider'
-import Carousal2 from './Carousal2'
+import N2 from '../Videos/N2.mp4'
 import SkeletonColor from './Skeleton'
 import Footer from './Footer'
+const Pixar = () => {
 
-const Tv = () => {
-
-
-
-    const { tvBanner } = useContext(userContext)
     const [show, setShow] = useState(false)
+
+
     const [data, setData] = useState([])
 
     const getData = async() =>{
         try {
             
-            const res5 = await fetch('/tv',{
+            const res5 = await fetch('/pixar',{
             method:'GET',
             headers:{
                 'Content-Type' : 'application/json'
@@ -34,16 +32,19 @@ const Tv = () => {
         }
     }
 
+
     
     useEffect(() => {
-        getData()
+        getData(); 
     }, [])
-
-
 
     return (
         <div className='body2'>
-            <Carousal2 data={tvBanner} />
+            <video playsInline={true} preload='auto' autoPlay={true} muted={true} className='video2'>
+                <source src={N2} type="video/mp4" style={{
+                    borderRadius:'5px'
+                }}/>
+            </video>
 
             <div style={{
               display:show?'none':'flex'
@@ -58,20 +59,20 @@ const Tv = () => {
               display:show?'block':'none'
             }}>
 
-                <h5>Top Picks For You</h5>
-                <Slider data={[...data]}/>
-                <h5>Popular Shows</h5>
-                <Slider data={[...data].reverse()}/>
-                <h5>New on Disney+ Hotstar</h5>
-                <Slider data={[...data]}/>
-                <h5>Popular in Reality</h5>
-                <Slider data={[...data].reverse()}/>
+                <h5>Originals</h5>
+                <Slider data={[...data]} mov={true}/>
+                <h5>Pixar Movies</h5>
+                <Slider data={[...data].reverse()} mov={true}/>
+                <h5>SparkShorts</h5>
+                <Slider data={[...data]} mov={true}/>
+                <h5>Unlikely Heroes</h5>
+                <Slider data={[...data].reverse()} mov={true}/>
+                <h5>Pixar Through The Years</h5>
+                <Slider data={[...data]} mov={true}/>
                 <Footer />
             </div>
-
         </div>
     )
 }
 
-export default Tv
-
+export default Pixar
