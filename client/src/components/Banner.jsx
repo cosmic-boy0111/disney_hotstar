@@ -27,6 +27,7 @@ const Banner = ({obj,show=false,got=true}) => {
     }
 
     const go2 = () => {
+        localStorage.setItem('movie_selected',JSON.stringify(obj.vImg))
         history.push('/subscribe')
     }
 

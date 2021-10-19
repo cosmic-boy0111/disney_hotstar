@@ -30,6 +30,8 @@ const App = () => {
   const [more, setMore] = useState({})
   const [allData, setAllData] = useState([])
   const [text, setText] = useState('')
+  const [open, setOpen] = React.useState(false);
+
 
 
   const getData = async () =>{
@@ -174,6 +176,8 @@ const App = () => {
           allData,
           text, 
           setText,
+          open, 
+          setOpen
         }}>
 
         <Switch > 

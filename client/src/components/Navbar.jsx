@@ -6,11 +6,12 @@ import SearchIcon from '@mui/icons-material/Search';
 import { userContext } from '../App'
 import Search from './Search';
 import { useHistory } from 'react-router-dom'
+import CustomizedDialogs from './LoginContainer';
 
 const Navbar = () => {
 
     const history = useHistory();
-    const {setText} = useContext(userContext)
+    const {setText,setOpen} = useContext(userContext)
 
     const set = () =>{
         setText('')
@@ -21,8 +22,14 @@ const Navbar = () => {
         p.style.borderBottom = '1px solid white';
     }
 
+    const go = () => {
+        localStorage.removeItem('movie_selected')
+        history.push('/subscribe')
+    }
+
     return (
         <>
+            <CustomizedDialogs />
             <div className="navbar2" >
                 <div className='links' onClick={()=>set()}>
                     <NavLink to='/' className='logo'>  <img src={logo} alt="img" /> </NavLink>
@@ -33,8 +40,8 @@ const Navbar = () => {
 
                 <div className='search_login'>
                     <Search />
-                    <button className='sub' onClick={()=>history.push('/subscribe')}>SUBSCRIBE</button>
-                    <button className='login'>LOGIN</button>
+                    <button className='sub' onClick={go}>SUBSCRIBE</button>
+                    <button className='login' onClick={()=>setOpen(true)}>LOGIN</button>
                 </div>
             </div>
         </>

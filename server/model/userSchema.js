@@ -5,26 +5,26 @@ const jwt = require('jsonwebtoken')
 
 
 const userSchema = new mongoose.Schema({
-    name : {
+    // name : {
+    //     type : String,
+    //     required : true
+    // },
+    user : {
         type : String,
         required : true
     },
-    email : {
-        type : String,
-        required : true
-    },
-    phone : {
-        type : String,
-        required : true
-    },
+    // phone : {
+    //     type : String,
+    //     required : true
+    // },
     password : {
         type : String,
         required : true
     },
-    cpassword : {
-        type : String,
-        required : true
-    },
+    // cpassword : {
+    //     type : String,
+    //     required : true
+    // },
     
     tokens : [
         {
@@ -368,7 +368,6 @@ userSchema.pre('save', async function (next){
     console.log('i am insider');
     if(this.isModified('password')){
         this.password = await bcrypt.hash(this.password, 12);
-        this.cpassword = await bcrypt.hash(this.cpassword, 12);
     }
     next();
 })

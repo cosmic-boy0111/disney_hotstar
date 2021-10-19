@@ -1,0 +1,104 @@
+.css-1t1j96h-MuiPaper-root-MuiDialog-paper{
+    width: 460px !important;
+    background: linear-gradient(to bottom, #192133, #111826) !important;
+    color: white !important;
+    border-radius: 3px !important;
+}
+
+#alert-dialog-title{
+    color: white !important;
+}
+
+.css-78trlr-MuiButtonBase-root-MuiIconButton-root{
+    color: white !important;
+    opacity: .6 !important;
+}
+
+.login_option{
+    /* border: 1px solid red; */
+    margin: 3rem 3rem;
+    margin-bottom: 5rem;
+}
+
+.login_option h6{
+    font-size: 17px;
+    margin: 0;
+    
+}
+
+.email_click{
+    border: none;
+    outline: none;
+    width: 100%;
+    margin-top: 3rem;
+    border-radius: 5px;
+    padding: .8rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #1f80e0;
+    border: 1px solid #1f80e0;
+    background-color: rgba(31,127,224,0.1);
+    cursor: pointer;
+
+}
+
+.or{
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0;
+}       
+
+.mob{
+    padding: .2rem 0;
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+#bottom_bor{
+    border-bottom: 1px solid #1f80e0;
+    /* border-bottom: 1px solid #036bd3; */
+    transition: all .5s ease-in-out;
+}
+
+.mob input{
+    border: none;
+    outline: none;
+    color: white;
+    background-color: transparent;
+}
+
+.email_input{
+    border: none;
+    outline: none;
+    background-color: transparent;
+    margin: .8rem 0;
+    border-bottom: 1px solid #1f80e0;
+    width: 100%;
+    padding: .5rem 0;
+    color: white !important;
+}
+
+.continue2{
+    width: 100%;
+    padding: .8rem 0;
+    background-color: #1f80e0;
+    border-radius: 3px;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    cursor: pointer;
+    border: none;
+    color: white !important;
+    outline: none;
+
+}
+
+.continue2 h6{
+    margin: 0;
+    padding: 0;
+}

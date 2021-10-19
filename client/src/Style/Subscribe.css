@@ -1,6 +1,6 @@
 .sub2{
     /* background-color: transparent; */
-    height: 720px;
+    height: 100px;
     /* border: 1px solid red; */
     width: 100%;
     /* opacity: .7; */
@@ -11,7 +11,7 @@
 
 .extra{
     width: 100%;
-    height: 200px;
+    height: 400px;
     position: absolute;
     top: 550px;
     /* border: 1px solid red; */
@@ -22,6 +22,7 @@
     height: 100%;
     width: 100%;
     position: absolute;
+    top: 0;
 }
 
 .sub_container{
@@ -43,8 +44,14 @@
     padding-top: 75px;
 }
 
+.container2 .muze-ni-pta{
+    width: 100px;
+    border: 1px solid #fff;
+    border-radius: 4px;
+}
+
 .container2 h4{
-    margin-top: 4rem;
+    margin-top: 1rem;
 }
 
 .container2::-webkit-scrollbar {
@@ -80,7 +87,7 @@
     width: 100%;
     justify-content: space-between;
     /* align-items: center; */
-    height: 75px;
+    height: 70px;
     top: 0rem;
     color: white;
     background-color: #12192683;
@@ -111,42 +118,20 @@
     /* margin-top: 3rem; */
     padding-top: 2rem;
     padding-bottom: 2rem;
-    border-radius: 6px;
+    border-radius: 10px;
     background: linear-gradient(to bottom, #192133, #111826);
 }
 
-.css-11xur9t-MuiPaper-root-MuiTableContainer-root{
-    box-shadow: none !important;
-    border-bottom: 1px solid white;
-    border-radius: 0% !important;
-    font-size: 13px !important;
-    opacity: .8 !important;
-}
-
-.css-1ex1afd-MuiTableCell-root{
-    color: white !important;
-    padding: .6rem 0 !important;
-    font-size: 16px !important;
-}
-
-.css-1yhpg23-MuiTableCell-root{
-    color: white !important;
-    font-size: 16px !important;
-    padding: .7rem 1rem !important;
-}
-
-.css-1ndpvdd-MuiTableCell-root{
-    color: white !important;
-    font-size: 16px !important;
-    padding: .6rem 1rem !important;
-}
 
 
 .pack1,.pack2{
     width: 49%;
     border: 1px solid #334366;
-    padding: .7rem .5rem;
+    padding: .5rem .5rem;
     border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
 }
 /* .pack2{
     width: 49%;
@@ -192,5 +177,28 @@
     padding: 1rem 0;
     border-radius: 3px;
     background-color: #1f80e0;
+    cursor: pointer;
+}
 
+
+.pack_details{
+    display: flex;
+    /* border: 1px solid red; */
+    border-bottom: 1px solid #2e3333;
+    justify-content: space-between;
+    opacity: .8;
+}
+
+.pack_details h6{
+    margin: 0;
+}
+
+.load{
+    background: linear-gradient(to bottom, #141b29, #0c111b 300px);
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }

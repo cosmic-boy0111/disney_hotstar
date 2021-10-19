@@ -32,20 +32,20 @@ router.get('/', (req,res)=>{
 ///////////////// user //////////////// 
 
 router.post('/register',async(req,res)=>{
-    const { name,email,phone,password,cpassword } = req.body
-    if( !name || !phone || !email || !password || !cpassword ){
+    const { user,password } = req.body
+    if( !user || !password ){
         return res.status(422).json({error:'error'});
     }
 
     try {
-        const userExits =  await  User.findOne({email:email});
+        const userExits =  await  User.findOne({user:user});
 
         if(userExits){
-            return res.status(422).json({error:'email already exist'})
+            return res.status(422).json({error:'user already exist'})
         }
 
-        const user = new User({ name,email,phone,password,cpassword});
-        await user.save();
+        const data = new User({user,password});
+        await data.save();
 
         res.status(201).json({ message: 'user registered' })
 
@@ -61,14 +61,14 @@ router.post('/signin', async (req,res)=>{
     console.log('in signin');
     try {
         let token;
-        const {email,password} = req.body;
-        if(!email || !password){
+        const {user,password} = req.body;
+        if(!user || !password){
             return res.status(400).json({
                 error:'plz fill the data'
             })
         }
 
-        const userLogin = await User.findOne({email:email});
+        const userLogin = await User.findOne({user:user});
 
         // console.log(userLogin);
         if(userLogin){

@@ -33,6 +33,7 @@ const Card = ({obj,idx,mov}) => {
         history.push('/moreabout')
     }
     const go2 = () =>{
+        localStorage.setItem('movie_selected',JSON.stringify(obj.vImg))
         history.push('/subscribe')
     }
 
