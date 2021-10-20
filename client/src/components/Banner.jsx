@@ -1,4 +1,4 @@
-import React,{useContext} from 'react'
+import React,{useContext,useState,useEffect} from 'react'
 import { userContext } from '../App'
 import '../Style/Banner.css'
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
@@ -6,10 +6,25 @@ import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import ShareRoundedIcon from '@mui/icons-material/ShareRounded';
 import { display } from '@mui/system';
 import { useHistory } from 'react-router-dom'
+import DoneRoundedIcon from '@mui/icons-material/DoneRounded';
+import Watchlist from './Watchlist';
+
 const Banner = ({obj,show=false,got=true}) => {
 
     const history = useHistory();
-    const {setMore, setText} = useContext(userContext);
+    const {more, setMore, setText,watchData, setWatchData} = useContext(userContext);
+
+    const [watch, setWatch] = useState(false)
+
+    useEffect(() => {
+        var t = false;
+        watchData.forEach((e)=>{
+            if(e.name===obj.name){
+                t = true;
+            }
+        })
+        setWatch(t);
+    }, [more])
 
     const go = () =>{
 
@@ -29,6 +44,22 @@ const Banner = ({obj,show=false,got=true}) => {
     const go2 = () => {
         localStorage.setItem('movie_selected',JSON.stringify(obj.vImg))
         history.push('/subscribe')
+    }
+
+    const add_remove = () =>{
+        if(watch){
+            setWatch(false)
+            let data = watchData.filter((e)=>{
+                return e.name !== obj.name;
+            })
+            setWatchData(data);
+            localStorage.setItem('watch',JSON.stringify(data))
+        }else{
+            setWatch(true)
+            let data = [...watchData,obj];
+            setWatchData(data);
+            localStorage.setItem('watch',JSON.stringify(data))
+        }
     }
 
     return (
@@ -61,8 +92,13 @@ const Banner = ({obj,show=false,got=true}) => {
                         // width:'70%',
                         alignItems:'center',
                         cursor:'pointer'
-                    }}>
-                        <AddRoundedIcon fontSize='large'/>
+                    }}
+                    onClick={add_remove}
+                    >
+                        
+                        {
+                            watch?<DoneRoundedIcon fontSize='large' style={{color:'#1f80e0'}}/>:<AddRoundedIcon fontSize='large'/>
+                        }
                         <p style={{
                             margin:'0 1rem',
                             fontSize:'10px',

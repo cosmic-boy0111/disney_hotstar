@@ -1,15 +1,25 @@
-import React,{useContext} from 'react'
+import React,{useContext,useState} from 'react'
 import '../Style/Card.css'
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import { userContext } from '../App'
 import { useHistory } from 'react-router-dom'
+import AddRoundedIcon from '@mui/icons-material/AddRounded';
+import DoneRoundedIcon from '@mui/icons-material/DoneRounded';
+
 const Card = ({obj,idx,mov}) => {
 
-    const {setMore,setText} = useContext(userContext)
+    
+    const {setMore,setText,watchData, setWatchData} = useContext(userContext)
+    const [watch, setWatch] = useState(false)
 
     const history = useHistory();
 
     const doThis = () =>{
+        watchData.forEach((e)=>{
+            if(e.name === obj.name){
+                setWatch(true)
+            }
+        })
         document.getElementById(idx).style.opacity = '1';
         document.getElementById(idx).style.backgroundImage = 'linear-gradient(to bottom, rgba(4,8,15,0), #192133, #192133)'
         document.getElementById(idx).style.backgroundSize = 'center-cover'
@@ -36,6 +46,25 @@ const Card = ({obj,idx,mov}) => {
         localStorage.setItem('movie_selected',JSON.stringify(obj.vImg))
         history.push('/subscribe')
     }
+
+    
+    const add_remove = () =>{
+        if(watch){
+            setWatch(false);
+            const data =  watchData.filter(e=>{
+                return e.name !== obj.name;
+            })
+
+            setWatchData(data)
+            localStorage.setItem('watch',JSON.stringify(data));
+        }else{
+            setWatch(true);
+            const data = [...watchData,obj];
+            setWatchData(data);
+            localStorage.setItem('watch',JSON.stringify(data));
+        }
+    }
+
 
     return (
         <div className='card_body' style={{
@@ -83,12 +112,22 @@ const Card = ({obj,idx,mov}) => {
                     > <span style={{fontSize:'11px', marginRight:'.7rem'}}><PlayArrowRoundedIcon fontSize='small'/> </span>  <span>watch movie</span></span> 
                     <span style={{
                       display:'flex' ,
-                      alignItems:'center',
+                      flexDirection:watch?'column':'row',
+                      alignItems:watch?'flex-start':'center'
 
                     }}
                     className='controls2'
-                    onClick={go2}
-                    > <span style={{fontSize:'11px', marginRight:'.7rem',marginLeft:'.2rem'}}>+</span>  <span>Add to Watchlist</span></span> 
+                    onClick={add_remove}
+                    > <span style={{fontSize:'11px', marginRight:'.7rem'}}>
+                    {
+                        watch?<DoneRoundedIcon color='success' style={{fontSize:'12px',fontWeight:'bold'}}/>:<AddRoundedIcon fontSize='small'/>
+                    }
+                    </span>  <span>
+                    {
+                        watch?'remove from Watchlist':'Add to Watchlist'
+                    }
+                    
+                    </span></span> 
                 </div>
                 
             </div>

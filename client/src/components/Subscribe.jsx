@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import '../Style/Subscribe.css'
@@ -9,10 +9,15 @@ import PackContainer from './PackContainer';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import { useHistory } from 'react-router-dom'
 import CircularIndeterminate from './CircularProgress'
+import BasicMenu from './Menu'
+import { userContext } from '../App'
+import CustomizedDialogs from './LoginContainer';
+
 
 const Subscribe = () => {
 
     const history = useHistory();
+    const { isLogin,setOpen } = useContext(userContext)
     const [show, setShow] = useState(false)
 
     useEffect(() => {
@@ -24,10 +29,11 @@ const Subscribe = () => {
 
     return (
         <>
+        <CustomizedDialogs />
         <div className='load' display={{
             display:!show?'flex':'none'
         }}>
-            <img src={logo} alt="" style={{width:'150px'}}/>
+            <img src={logo} alt="" style={{width:'150px',marginBottom:'1rem'}}/>
             <CircularIndeterminate />
         </div>
         <div style={{
@@ -49,7 +55,10 @@ const Subscribe = () => {
                     justifyContent:'center',
                     alignItems:'center'
                 }}> 
-                    <button className='sub_login' >Log in</button>
+                {
+                    isLogin?<BasicMenu />:<button className='sub_login' onClick={()=>setOpen(true)}>Log in</button>
+
+                }
                 </div>
             </div>
         <div className='sub_container' id='sub_container'>

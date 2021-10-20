@@ -15,7 +15,7 @@ import CircularColor from './WhiteCircular';
 
 export default function AlertDialog() {
 
-    const {open, setOpen} = useContext(userContext)
+    const {open, setOpen, setIsLogin, setRootUser} = useContext(userContext)
     const [valid, setValid] = useState(false)
 
     const [number, setNumber] = useState('')
@@ -123,6 +123,11 @@ export default function AlertDialog() {
             }else{
                 window.alert('complete')
                 setLPassword('')
+                setIsLogin(true)
+                setRootUser({
+                    user : user,
+                    password : lPassword
+                })
                 setUser('')
                 setOpen(false)
             }

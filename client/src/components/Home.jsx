@@ -16,13 +16,13 @@ const Home = () => {
     const [superHero, setSuperHero] = useState([])
 
     
-    function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array
-    }
+    // function shuffleArray(array) {
+    //     for (let i = array.length - 1; i > 0; i--) {
+    //         const j = Math.floor(Math.random() * (i + 1));
+    //         [array[i], array[j]] = [array[j], array[i]];
+    //     }
+    //     return array
+    // }
     
   const getData = async () =>{
 
@@ -125,23 +125,23 @@ const Home = () => {
               display:show?'block':'none'
             }}>
                 <h5>Latest & Trending</h5>
-                <Slider data={shuffleArray([...data])} mov={true}/>
+                <Slider data={[...data]} mov={true}/>
                 <h5>Popular Shows</h5>
-                <Slider data={shuffleArray([...data])} mov={true}/>
+                <Slider data={[...data].reverse()} mov={true}/>
                 <h5>Shows Recommended For You</h5>
                 <Slider data={shows} />
                 <h5>Movies Recommended For You</h5>
-                <Slider data={shuffleArray([...data])} mov={true}/>
+                <Slider data={[...data]} mov={true}/>
                 <h5>Popular Movies</h5>
-                <Slider data={shuffleArray([...data])} mov={true}/>
+                <Slider data={[...data].reverse()} mov={true}/>
                 <h5>New on Disney+ Hotstar</h5>
-                <Slider data={shuffleArray([...data])} mov={true}/>
+                <Slider data={[...data]} mov={true}/>
                 <h5>Popular in Action</h5>
-                <Slider data={shuffleArray([...data])} mov={true}/>
+                <Slider data={[...data].reverse()} mov={true}/>
                 <h5>Best of Superheroes</h5>
                 <Slider data={superHero} mov={true}/>
                 <h5>Popular in Disney+</h5>
-                <Slider data={shuffleArray([...data])} mov={true}/>
+                <Slider data={[...data].reverse()} mov={true}/>
                 <Footer />
             </div>
 

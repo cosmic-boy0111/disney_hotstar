@@ -7,7 +7,6 @@ import { userContext } from '../App'
 import CircularIndeterminate from './CircularProgress'
 
 
-
 const SearchMore = () => {
 
     const {text} = useParams();

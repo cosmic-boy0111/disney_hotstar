@@ -7,11 +7,12 @@ import { userContext } from '../App'
 import Search from './Search';
 import { useHistory } from 'react-router-dom'
 import CustomizedDialogs from './LoginContainer';
+import BasicMenu from './Menu';
 
 const Navbar = () => {
 
     const history = useHistory();
-    const {setText,setOpen} = useContext(userContext)
+    const {setText,setOpen,isLogin} = useContext(userContext)
 
     const set = () =>{
         setText('')
@@ -41,7 +42,14 @@ const Navbar = () => {
                 <div className='search_login'>
                     <Search />
                     <button className='sub' onClick={go}>SUBSCRIBE</button>
-                    <button className='login' onClick={()=>setOpen(true)}>LOGIN</button>
+                    <div style={{
+                        display:!isLogin?'none':'inline'
+                    }}>
+                        <BasicMenu />
+                    </div>
+                    <button className='login' onClick={()=>setOpen(true)} style={{
+                        display:isLogin?'none':'inline'
+                    }}>LOGIN</button>
                 </div>
             </div>
         </>

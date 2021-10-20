@@ -163,3 +163,23 @@
     border-bottom-right-radius: 6px;
     border-top-right-radius: 6px;
 }
+
+.menu_holder{
+    /* border: 1px solid red; */
+    position: absolute;
+    right: 3rem;
+    top: 3.5rem;
+    display: none;
+    opacity: 0;
+    flex-direction: column;
+    border-radius: 5px;
+    background-color: #192133;
+    font-size: 14px;
+    transition: all .3s ease-in-out ;
+}
+
+.item{
+    padding: .5rem 1rem;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}

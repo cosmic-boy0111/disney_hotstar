@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 import check from '../Images/filled-check.webp'
+import { useHistory } from 'react-router-dom'
 const PackContainer = () => {
 
     const [tog, setTog] = useState(true)
+    const history = useHistory();
 
     return (
         <div className='pack_container'>
@@ -293,7 +295,9 @@ const PackContainer = () => {
                     </div>
                 </div>
             </div>
-            <div className='continue'>
+            <div className='continue'  onClick={
+                    ()=>history.push(`/pay/${tog?'super':'premium'}/${tog?'899':'1499'}/${tog?'2':'4'}/${tog?'FHD(1080p)':'4K(2160p'}`)
+            }>
                 <h6 style={{margin:'0'}}>continue with {tog?'super':'premium'}</h6>
             </div>
         </div>

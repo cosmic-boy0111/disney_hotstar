@@ -18,6 +18,10 @@ import Footer from './components/Footer';
 import MoreAbout from './components/MoreAbout';
 import SearchMore from './components/SearchMore';
 import Subscribe from './components/Subscribe';
+import { useScrollTrigger } from '@mui/material';
+import Watchlist from './components/Watchlist';
+import Account from './components/Account';
+import Pay from './components/Pay';
 
 export const userContext = createContext();
 
@@ -31,6 +35,11 @@ const App = () => {
   const [allData, setAllData] = useState([])
   const [text, setText] = useState('')
   const [open, setOpen] = React.useState(false);
+  const [isLogin, setIsLogin] = useState(false);
+  const [rootUser, setRootUser] = useState({})
+  const [watchData, setWatchData] = useState(
+    JSON.parse(localStorage.getItem('watch')) === null ? [] : JSON.parse(localStorage.getItem('watch'))
+  )
 
 
 
@@ -38,6 +47,23 @@ const App = () => {
 
 
     try {
+
+
+      const loginRes = await fetch('/getdata',{
+        method:'GET',
+        headers:{
+          'Content-Type':'application/json'
+        }
+      })
+
+      const loginData =  await loginRes.json();
+      if(loginRes.status === 200){
+        // console.log(loginData);
+        setRootUser(loginData);
+        setIsLogin(true);
+      }
+
+
       const res = await fetch('/mainHeader',{
         method:'GET',
         headers:{
@@ -177,10 +203,17 @@ const App = () => {
           text, 
           setText,
           open, 
-          setOpen
+          setOpen,
+          isLogin, 
+          setIsLogin,
+          rootUser, 
+          setRootUser,
+          watchData, 
+          setWatchData
         }}>
 
         <Switch > 
+          
           <Route exact path="/">
             <Navbar />
             <Home />
@@ -236,6 +269,17 @@ const App = () => {
           </Route>
           <Route exact path="/subscribe">
             <Subscribe />
+          </Route>
+          <Route exact path="/watchlist">
+            <Navbar />
+            <Watchlist />
+          </Route>
+          <Route exact path="/account">
+            <Navbar />
+            <Account />
+          </Route>
+          <Route exact path="/pay/:name/:prize/:device/:qua">
+            <Pay />
           </Route>
         </Switch>
         </userContext.Provider>

@@ -116,7 +116,7 @@ router.get('/about', authenticate , (req,res)=>{
 
 router.get('/getdata', authenticate , (req,res)=>{
     console.log(`hello my about`);
-    res.send(req.rootUser);
+    res.status(200).send(req.rootUser);
 })
 
 // contact us page
