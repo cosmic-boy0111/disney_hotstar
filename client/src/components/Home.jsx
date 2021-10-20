@@ -8,7 +8,9 @@ import Footer from './Footer'
 
 const Home = () => {
 
-    const { homeBanner } = useContext(userContext)
+    const { homeBanner,
+      setHomeBanner,
+    } = useContext(userContext)
     const [show, setShow] = useState(false)
 
     const [data, setData] = useState([])
@@ -16,18 +18,55 @@ const Home = () => {
     const [superHero, setSuperHero] = useState([])
 
     
-    // function shuffleArray(array) {
-    //     for (let i = array.length - 1; i > 0; i--) {
-    //         const j = Math.floor(Math.random() * (i + 1));
-    //         [array[i], array[j]] = [array[j], array[i]];
-    //     }
-    //     return array
-    // }
-    
   const getData = async () =>{
 
 
     try {
+
+      
+    
+      const res = await fetch('/mainHeader',{
+        method:'GET',
+        headers:{
+          'Content-Type' : 'application/json'
+        }
+      })
+
+      const data = await res.json();
+      setHomeBanner(data);
+
+      const res2 = await fetch('/tvHeader',{
+        method:'GET',
+        headers:{
+          'Content-Type' : 'application/json'
+        }
+      })
+
+      const data2 = await res2.json();
+      // setTvBanner(data2)
+
+
+      const res3 = await fetch('/moviesHeader',{
+        method:'GET',
+        headers:{
+          'Content-Type' : 'application/json'
+        }
+      })
+
+      const data3 = await res3.json();
+      // setMoviesBanner(data3)
+
+      const res4 = await fetch('/disneyHeader',{
+        method:'GET',
+        headers:{
+          'Content-Type' : 'application/json'
+        }
+      })
+
+      const data4 = await res4.json();
+      // setDisneyBanner(data4)
+
+
       
       const res5 = await fetch('/tv',{
         method:'GET',
@@ -37,6 +76,7 @@ const Home = () => {
       })
 
       const data5 = await res5.json();
+      // setTv(data5)
       setShows(data5)
 
       const res6 = await fetch('/movies',{
@@ -98,6 +138,9 @@ const Home = () => {
       setData([...data6,...data7,...data8,...data9,...data10,...data11])
 
       setShow(true);
+
+      var link = document.getElementsByClassName('control-next')[0];
+        link.click();
 
     } catch (error) {
       console.log(error);

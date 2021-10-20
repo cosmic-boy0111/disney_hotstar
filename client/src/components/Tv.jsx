@@ -10,7 +10,7 @@ const Tv = () => {
 
 
 
-    const { tvBanner } = useContext(userContext)
+    const { tvBanner,setTvBanner } = useContext(userContext)
     const [show, setShow] = useState(false)
     const [data, setData] = useState([])
 
@@ -27,7 +27,19 @@ const Tv = () => {
             const data5 = await res5.json();
             setData(data5)
 
+            
+            const res2 = await fetch('/tvHeader',{
+                method:'GET',
+                headers:{
+                    'Content-Type' : 'application/json'
+                }
+            })
+            
+            const data2 = await res2.json();
+            setTvBanner(data2)
             setShow(true)
+            var link = document.getElementsByClassName('control-next')[0];
+            link.click();
 
         } catch (error) {
             console.log('error');

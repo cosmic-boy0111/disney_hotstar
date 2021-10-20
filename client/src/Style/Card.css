@@ -78,7 +78,7 @@
     position: absolute;
     outline: 0;
     border-radius: 0px !important;
-    z-index: 1000;
+    z-index: 10 !important;
     border: 0;
     background: transparent !important;
     min-width: 43px;

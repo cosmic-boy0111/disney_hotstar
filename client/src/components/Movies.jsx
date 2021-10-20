@@ -8,7 +8,7 @@ import Footer from './Footer'
 const Movies = () => {
 
     const [show, setShow] = useState(false)
-    const { moviesBanner} = useContext(userContext)
+    const { moviesBanner,setMoviesBanner} = useContext(userContext)
     const [data, setData] = useState([])
 
     const getData = async() =>{
@@ -24,7 +24,19 @@ const Movies = () => {
             const data5 = await res5.json();
             setData(data5)
 
+            const res3 = await fetch('/moviesHeader',{
+                method:'GET',
+                headers:{
+                  'Content-Type' : 'application/json'
+                }
+              })
+        
+              const data3 = await res3.json();
+              setMoviesBanner(data3)
+
             setShow(true)
+            var link = document.getElementsByClassName('control-next')[0];
+            link.click();
 
         } catch (error) {
             console.log('error');

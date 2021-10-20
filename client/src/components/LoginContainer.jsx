@@ -88,6 +88,7 @@ export default function AlertDialog() {
 
             if(res.status === 422){
                 window.alert('invalid')
+                setValid(false)
             }else{
                 setShow(false)
                 window.alert('complete')
@@ -120,6 +121,7 @@ export default function AlertDialog() {
             setShow(false);
             if(res.status === 400){
                 window.alert('invalid')
+                setValid(false)
             }else{
                 window.alert('complete')
                 setLPassword('')

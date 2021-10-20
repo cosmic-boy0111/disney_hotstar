@@ -14,6 +14,11 @@
     opacity: .6 !important;
 }
 
+.css-uhb5lp{
+    width: 35% !important;
+    background: linear-gradient(to bottom, #192133, #111826) !important;
+}
+
 .login_option{
     /* border: 1px solid red; */
     margin: 3rem 3rem;

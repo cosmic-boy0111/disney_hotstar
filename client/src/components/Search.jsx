@@ -65,7 +65,7 @@ const Search = () => {
         
         // onMouseDown={decBar}
         >
-            <form style={{
+            <div style={{
                 display:'flex'
             }}
             className='border2'
@@ -76,7 +76,7 @@ const Search = () => {
                 opacity:'.7'  ,
                 fontSize:'19px'
             }}/>
-            </form>
+            </div>
             <div className='search_container' style={{
                 display:text===''?'none':'flex',
                 flexDirection:'column'

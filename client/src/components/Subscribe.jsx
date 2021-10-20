@@ -17,13 +17,34 @@ import CustomizedDialogs from './LoginContainer';
 const Subscribe = () => {
 
     const history = useHistory();
-    const { isLogin,setOpen } = useContext(userContext)
+    const { isLogin,setOpen,setIsLogin,setRootUser } = useContext(userContext)
     const [show, setShow] = useState(false)
 
+    const getData = async() =>{
+        try {
+            const loginRes = await fetch('/getdata',{
+                method:'GET',
+                headers:{
+                  'Content-Type':'application/json'
+                }
+              })
+        
+              const loginData =  await loginRes.json();
+              if(loginRes.status === 200){
+                // console.log(loginData);
+                setRootUser(loginData);
+                setIsLogin(true);
+              }        
+        } catch (error) {
+            console.log('err');
+        }
+    }
+
     useEffect(() => {
+        getData()
        setTimeout(() => {
            setShow(true)
-       }, 1000);
+       }, 500);
     },[])
 
 

@@ -49,7 +49,7 @@ const Slider = ({data,mov=false}) => {
       >
           
           {
-            data.map((e,index)=>{
+            data===undefined?'':data.map((e,index)=>{
               return <Card obj={e} idx={uuid()} mov={mov}/>
             })
           }

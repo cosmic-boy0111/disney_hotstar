@@ -1,12 +1,15 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import Banner from './Banner';
 
 const Carousal2 = ({data}) => {
+
+
     return (
         <Carousel 
         autoPlay={true}
+        autoFocus={true}
         interval={4000}
         infiniteLoop={true}
         showThumbs={false}
